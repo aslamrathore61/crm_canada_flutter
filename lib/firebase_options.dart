@@ -51,18 +51,18 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA9BIyVCprwMT44Je0Cm-uXBpiR2VOaz0E',
-    appId: '1:393281013850:android:0feb3f4b493e5d958ef063',
+    appId: '1:1093778392176:android:0958105cce9580ba6420b5',
     messagingSenderId: '393281013850',
-    projectId: 'save-max-crm',
-    storageBucket: 'save-max-crm.appspot.com',
+    projectId: 'rise-canada',
+    storageBucket: 'rise-canada.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDoRBaxB7LYsX3MevX-KUKukVmNzODSzp0',
-    appId: '1:393281013850:ios:36fd0a68e6f92a0f8ef063',
-    messagingSenderId: '393281013850',
-    projectId: 'save-max-crm',
-    storageBucket: 'save-max-crm.appspot.com',
-    iosBundleId: 'com.savemax.crm.crmFlutter',
+    apiKey: 'AIzaSyAQ5_gI8KAZT9umKTuaPX9BpVbSa64RXDA',
+    appId: '1:1093778392176:ios:1b6c95e9aa2191f76420b5',
+    messagingSenderId: '1093778392176',
+    projectId: 'rise-canada',
+    storageBucket: 'rise-canada.appspot.com',
+    iosBundleId: 'com.savemax.crmcanada',
   );
 }

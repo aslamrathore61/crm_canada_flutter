@@ -108,7 +108,7 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
- FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
 print('justOne 1');
   runApp(MaterialApp(

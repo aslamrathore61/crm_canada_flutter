@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "393281013850",
-    "project_id": "save-max-crm",
-    "storage_bucket": "save-max-crm.appspot.com"
+    "project_number": "1093778392176",
+    "project_id": "rise-canada",
+    "storage_bucket": "rise-canada.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:393281013850:android:0feb3f4b493e5d958ef063",
+        "mobilesdk_app_id": "1:1093778392176:android:0958105cce9580ba6420b5",
         "android_client_info": {
-          "package_name": "com.savemax.crmm"
+          "package_name": "canada.savemax.crm"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA9BIyVCprwMT44Je0Cm-uXBpiR2VOaz0E"
+          "current_key": "AIzaSyDlwBMyYPC43dmfpddgWckF9NhzSYz5B7Q"
         }
       ],
       "services": {
