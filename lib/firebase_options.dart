@@ -50,9 +50,9 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA9BIyVCprwMT44Je0Cm-uXBpiR2VOaz0E',
+    apiKey: 'AIzaSyDlwBMyYPC43dmfpddgWckF9NhzSYz5B7Q',
     appId: '1:1093778392176:android:0958105cce9580ba6420b5',
-    messagingSenderId: '393281013850',
+    messagingSenderId: '1093778392176',
     projectId: 'rise-canada',
     storageBucket: 'rise-canada.appspot.com',
   );

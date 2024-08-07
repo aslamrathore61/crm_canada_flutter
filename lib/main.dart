@@ -28,8 +28,8 @@ FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
 AndroidNotificationChannel? channel;
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
- // If you're going to use other Firebase services in the background, such as Firestore,
- // make sure you call `initializeApp` before using other Firebase services.
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
 
   print("HandlingBackgroundMessage: ${message.messageId}");
   Fluttertoast.showToast(
@@ -108,13 +108,13 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-print('justOne 1');
+  print('justOne 1');
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     themeMode: ThemeMode.light, // Always use light theme
-      theme: ThemeData(fontFamily: 'Nunito',),
+    theme: ThemeData(fontFamily: 'Nunito',),
     home: RepositoryProvider(
 
       create: (context) => ApiProvider(),
@@ -127,7 +127,7 @@ print('justOne 1');
         final UserInfo? userInfo = args['userInfo'];
         final NativeItem nativeItem = args['nativeItem'];
         return BlocProvider(
-          create: (context) => GPSBloc()..add(CheckGPS()),
+            create: (context) => GPSBloc()..add(CheckGPS()),
             child: WebViewTab(nativeItem: nativeItem, userInfo: userInfo));
       },
       '/forceUpdatePage': (context) {

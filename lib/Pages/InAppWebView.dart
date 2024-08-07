@@ -149,7 +149,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       deepLinkingURL = Config.HOME_URL;
     }
 
-   _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(deepLinkingURL)));
+    _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(deepLinkingURL)));
   }
 
 
@@ -269,7 +269,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       },
       child: Scaffold(
         body: Container(
-        //  margin: EdgeInsets.only(top: _statusBarHeight),
+          //  margin: EdgeInsets.only(top: _statusBarHeight),
           color: Colors.white,
           //child: _buildWebView(),
           child: IsInternetConnected == false ?
@@ -278,11 +278,11 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
               tryAgain: _checkInitialConnectivity,
             ),
           ) : Stack(
-              children: [
+            children: [
               Container(
-              color: Colors.white,
-              margin: EdgeInsets.only(top: _statusBarHeight),
-              child: BlocConsumer<GPSBloc, GPSState>(
+                color: Colors.white,
+                margin: EdgeInsets.only(top: _statusBarHeight),
+                child: BlocConsumer<GPSBloc, GPSState>(
                   listener: (context, state) {
                     print('gpsState : xy');
                     if (state is GPSStatusUpdated) {
@@ -299,19 +299,19 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
                   builder: (context, state) {
                     return  _buildWebView();
                   },
+                ),
               ),
-              ),
-                if (_isLoading) ...[
-                  ModalBarrier(
-                    dismissible: false,
-                    color: Colors.black.withOpacity(0.3),
-                  ),
-                  Center(
-                      child: CircularProgressIndicator(
-                        color: Color(0xFF0054a0),
-                      )),
-                ],
+              if (_isLoading) ...[
+                ModalBarrier(
+                  dismissible: false,
+                  color: Colors.black.withOpacity(0.3),
+                ),
+                Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFF0054a0),
+                    )),
               ],
+            ],
           ),
 
 
@@ -332,7 +332,6 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
     initialSettings.useOnDownloadStart = true;
     initialSettings.useOnLoadResource = true;
     initialSettings.builtInZoomControls = false;
-  //  initialSettings.displayZoomControls = false;
     initialSettings.supportZoom = false;
     initialSettings.textZoom = 100;
     initialSettings.useShouldOverrideUrlLoading = true;
@@ -350,15 +349,15 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
     const Color.fromRGBO(0, 0, 0, 0.5);
 
     initialSettings.allowsLinkPreview = false;
-  //  initialSettings.isFraudulentWebsiteWarningEnabled = true;
+    //  initialSettings.isFraudulentWebsiteWarningEnabled = true;
     initialSettings.disableLongPressContextMenuOnLinks = true;
     //initialSettings.allowingReadAccessTo = WebUri('file://$WEB_ARCHIVE_DIR/');
 
     return InAppWebView(
-    //  keepAlive: InAppWebViewKeepAlive(),
-   initialUrlRequest: URLRequest(url: WebUri(Config.HOME_URL)),
-    initialSettings: initialSettings,
-     // windowId: widget.webViewModel.windowId,
+      //  keepAlive: InAppWebViewKeepAlive(),
+      initialUrlRequest: URLRequest(url: WebUri(Config.HOME_URL)),
+      initialSettings: initialSettings,
+      // windowId: widget.webViewModel.windowId,
       findInteractionController: _findInteractionController,
       onWebViewCreated: (controller) async {
         initialSettings.transparentBackground = false;
@@ -367,7 +366,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         _webViewController?.setSettings(
             settings:InAppWebViewSettings(builtInZoomControls:false)
         );
-      // _webViewController?.loadData(data: htmlContent, mimeType: 'text/html', encoding: 'utf-8');
+        // _webViewController?.loadData(data: htmlContent, mimeType: 'text/html', encoding: 'utf-8');
         addJavaScriptHandlers(controller, context);
         if (Util.isAndroid()) {
           controller.startSafeBrowsing();
@@ -375,7 +374,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
 
       },
       onLoadStart: (controller, url) async {
-      print('onLoadStart $url');
+        print('onLoadStart $url');
       },
       onLoadStop: (controller, url) async {
         print('onLoadStop $url');
@@ -539,24 +538,24 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
 
   void addJavaScriptHandlers(InAppWebViewController controller, BuildContext context) {
 
-  //  String response = "";
+    //  String response = "";
 
     controller.addJavaScriptHandler(handlerName: 'fromWebToFlutter', callback: (args) async {
       final messageFromWeb = args[0];
 
       if (messageFromWeb == "agentClockOut" || messageFromWeb == "agentClockIn" || messageFromWeb == "TrackCall" || messageFromWeb == "getActivityCoordinate") {
-       return await setLatLongToWeb(context);
+        return await setLatLongToWeb(context);
       }else if (messageFromWeb == "CaptureSiteImage") {
         final responseValue = await showOptions(context);
         Map<String, dynamic> response = jsonDecode(responseValue);
         return response;
       }else if (messageFromWeb == "GenerateFCMToken") {
-       return await Util.sentDeviceInfoToWeb();
+        return await Util.sentDeviceInfoToWeb();
         //_hideSystemUI();
       }else if (messageFromWeb == "showMap") {
         //_hideSystemUI();
       } else if (messageFromWeb == "closeMap") {
-      //  _showSystemUI();
+        //  _showSystemUI();
       }else {
         final decode = jsonDecode(messageFromWeb);
         _handleJsonMessageUserInfo(decode);
@@ -564,8 +563,8 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
 
       // Convert the JSON string to a JSON object
 
-     // print('responseFlutter $response');
-     // return response;
+      // print('responseFlutter $response');
+      // return response;
 
     });
   }
