@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1093778392176',
     projectId: 'rise-canada',
     storageBucket: 'rise-canada.appspot.com',
-    iosBundleId: 'com.savemax.crmcanada',
+    iosBundleId: 'com.risecrm.canada',
   );
 }
