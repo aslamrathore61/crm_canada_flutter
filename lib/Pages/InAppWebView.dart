@@ -375,6 +375,18 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       },
       onLoadStart: (controller, url) async {
         print('onLoadStart $url');
+        // Intercept tel: URLs before they load in the WebView
+        if (url != null && url.toString().startsWith('tel:')) {
+          controller.stopLoading(); // Stop the WebView from trying to load the tel: URL
+          _webViewController?.stopLoading();
+          if (await canLaunchUrl(url)) {
+            print('Launching dialer from onLoadStart');
+            await launchUrl(url);
+          } else {
+            print('Cannot launch dialer from onLoadStart');
+          }
+        }
+
       },
       onLoadStop: (controller, url) async {
         print('onLoadStop $url');
@@ -408,6 +420,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       onLoadResource: (controller, resource) {
 
       },
+
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         var url = navigationAction.request.url;
         print('shouldOverrideUrl $url');
@@ -418,6 +431,33 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
             await launchUrl(url);
             return NavigationActionPolicy.CANCEL;
           }
+        }
+
+
+        if (url != null) {
+          // Handle tel: URLs (Phone call links)
+          if (url.toString().startsWith('tel:')) {
+            if (await canLaunchUrl(url)) {
+              print('Launching dialer');
+              await launchUrl(url);
+              return NavigationActionPolicy.CANCEL;
+            } else {
+              print('Cannot launch dialer');
+              return NavigationActionPolicy.CANCEL;
+            }
+          }
+
+        // Handle tel: URLs (Phone call links)
+        if (url.toString().startsWith('tel:')) {
+          if (await canLaunchUrl(url!)) {
+            print('Launching dialer');
+            await launchUrl(url);
+            return NavigationActionPolicy.CANCEL;
+          } else {
+            print('Cannot launch dialer');
+            return NavigationActionPolicy.CANCEL;
+          }
+        }
         }
 
         if (url != null && !["http", "https", "file", "chrome", "data", "javascript", "about"].contains(url.scheme)) {
@@ -466,6 +506,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
             action: ServerTrustAuthResponseAction.PROCEED);
       },
       onReceivedError: (controller, request, error) async {
+
         print("Received error: ${error.description}");
         var isForMainFrame = request.isForMainFrame ?? false;
         if (!isForMainFrame) {
@@ -478,8 +519,9 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         // }
 
         var errorUrl = request.url;
+        print('errorURL $errorUrl');
 
-        _webViewController?.loadData(data: """
+  /*      _webViewController?.loadData(data: """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -508,7 +550,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       <p>${error.description}</p>
     </div>
 </body>
-    """, baseUrl: errorUrl, historyUrl: errorUrl);
+    """, baseUrl: errorUrl, historyUrl: errorUrl);*/
 
 
       },
