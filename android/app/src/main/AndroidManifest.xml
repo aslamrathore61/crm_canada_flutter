@@ -14,14 +14,13 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />
 
     <!--
             android:enableOnBackInvokedCallback="true"
     -->
 
     <application
-        android:label="Sync CRM Canada"
+        android:label="RISE CRM"
         android:exported="true"
         android:launchMode="singleTop"
         android:icon="@mipmap/ic_launcher_secondary"
