@@ -598,13 +598,20 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         final decode = jsonDecode(messageFromWeb);
         _handleJsonMessageUserInfo(decode);
       }
-
-      // Convert the JSON string to a JSON object
-
-      // print('responseFlutter $response');
-      // return response;
-
     });
+
+
+    controller.addJavaScriptHandler(handlerName: 'openDialer', callback: (args) async {
+      String phoneNumber = args[0];
+      String url = 'tel:$phoneNumber';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      };
+    });
+
+
   }
 
 
