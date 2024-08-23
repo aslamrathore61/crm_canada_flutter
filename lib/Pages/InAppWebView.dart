@@ -376,21 +376,6 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       onLoadStart: (controller, url) async {
 
         print('onLoadStart $url');
-        // Intercept tel: URLs before they load in the WebView
-        if (url != null && url.toString().startsWith('tel:')) {
-          controller.stopLoading(); // Stop the WebView from trying to load the tel: URL
-          _webViewController?.stopLoading();
-          if (await canLaunchUrl(url)) {
-            print('Launching dialer from onLoadStart');
-            await launchUrl(url);
-          } else {
-            print('Cannot launch dialer from onLoadStart');
-          }
-        }
-
-
-
-        print('onLoadStart $url');
       },
 
       onLoadStop: (controller, url) async {
@@ -439,22 +424,6 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         }
 
         print('urlname $url');
-
-
-        if (url != null) {
-          // Handle tel: URLs (Phone call links)
-          if (url.toString().startsWith('tel:')) {
-            if (await canLaunchUrl(url)) {
-              print('Launching dialer');
-              await launchUrl(url);
-              return NavigationActionPolicy.CANCEL;
-            } else {
-              print('Cannot launch dialer');
-              return NavigationActionPolicy.CANCEL;
-            }
-          }
-        }
-
 
         if (url != null && !["http", "https", "file", "chrome", "data", "javascript", "about"].contains(url.scheme)) {
           if (await canLaunchUrl(url)) {
