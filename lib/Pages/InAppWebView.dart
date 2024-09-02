@@ -963,8 +963,8 @@ Future<BranchUniversalObject> createBranchUniversalObject(String pageUrl) async 
   BranchUniversalObject buo = BranchUniversalObject(
     canonicalIdentifier: 'content/12345',
     canonicalUrl: pageUrl,
-    title: 'Page Title',
-    contentDescription: 'Description of the page',
+    // title: 'Page Title',
+    // contentDescription: 'Description of the page',
     contentMetadata: BranchContentMetaData()
       ..addCustomMetadata('url', pageUrl),
   );

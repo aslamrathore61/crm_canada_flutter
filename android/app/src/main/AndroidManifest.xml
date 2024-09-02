@@ -84,7 +84,7 @@
             <intent-filter>
                 <!-- If utilizing $deeplink_path please explicitly declare your hosts, or utilize a wildcard(*) -->
                 <!-- REPLACE `android:scheme` with your Android URI scheme -->
-                <data android:scheme="uatrisemb" android:host="open" />
+                <data android:scheme="risecrmdeep" android:host="open" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -96,9 +96,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- REPLACE `android:host` with your `app.link` domain -->
-                <data android:scheme="https" android:host="risemb-uat.app.link" />
+                <data android:scheme="https" android:host="risecrm.app.link" />
                 <!-- REPLACE `android:host` with your `-alternate` domain (required for proper functioning of App Links and Deepviews) -->
-                <data android:scheme="https" android:host="risemb-uat-alternate.app.link" />
+                <data android:scheme="https" android:host="risecrm-alternate.app.link" />
             </intent-filter>
 
             <!-- Branch App Links - Test App -->
@@ -106,9 +106,9 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="risemb-uat.app.link" />
+                <data android:scheme="https" android:host="risecrm.app.link" />
                 <!-- REPLACE `android:host` with your `-alternate` domain (required for proper functioning of App Links and Deepviews) -->
-                <data android:scheme="https" android:host="risemb-uat-alternate.app.link" />
+                <data android:scheme="https" android:host="risecrm-alternate.app.link" />
             </intent-filter>
 
 
@@ -127,9 +127,9 @@
 
         <!-- Branch init -->
         <!-- REPLACE `BranchKey` with the value from your Branch Dashboard -->
-        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_mlMxWtIrS468bo3j9JsiWfforzdtpMBf" />
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_mEoN0E4ol4PZ2sVUOkzwbopozFkaEtpS" />
         <!-- REPLACE `BranchKey.test` with the value from your Branch Dashboard -->
-        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="secret_live_lkbJqx3szBLSuu6fMx6ySVEHCemzXBRx" />
+        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="secret_live_G2AAHICkO0Dl2sQtDEIZnlgkikhdfR06" />
         <!-- Set to `true` to use `BranchKey.test` -->
         <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
 
