@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:crm_flutter/bloc/gpsBloc/gps_bloc.dart';
 import 'package:crm_flutter/bloc/gpsBloc/gps_event.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -21,6 +23,7 @@ import 'model/native_item.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'model/user_info.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 late final String WEB_ARCHIVE_DIR;
 
@@ -48,6 +51,33 @@ Future<void> main() async {
 
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize the Branch SDK
+  FlutterBranchSdk.init();
+
+/*  // Wait a moment for the initialization to complete
+  await Future.delayed(Duration(milliseconds: 100));
+
+ */
+
+
+
+  // FlutterBranchSdk.validateSDKIntegration();
+
+  // StreamSubscription<Map> streamSubscription = FlutterBranchSdk.listSession().listen((data) {
+  //   if (data.containsKey("+clicked_branch_link") &&
+  //       data["+clicked_branch_link"] == true) {
+  //     //Link clicked. Add logic to get link data and route user to correct screen
+  //     print('Custom string: ${data["custom_string"]}');
+  //
+  //   }
+  // }, onError: (error) {
+  //   PlatformException platformException = error as PlatformException;
+  //   print(
+  //       'InitSession error: ${platformException.code} - ${platformException.message}');
+  // });
+
+
 
   WEB_ARCHIVE_DIR = (await getApplicationSupportDirectory()).path;
 

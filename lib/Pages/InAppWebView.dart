@@ -22,6 +22,7 @@ import 'package:lottie/lottie.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Component/buttons/socal_button.dart';
@@ -35,6 +36,7 @@ import '../model/native_item.dart';
 import '../model/user_info.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 import 'package:geolocator/geolocator.dart' as geolocator;
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 import 'NoInternetConnectionPage.dart';
 
@@ -113,6 +115,20 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
     /*else {
       handleDeepLink(null);
     }*/
+
+    // Now, you can call initSession to handle deep links
+    FlutterBranchSdk.initSession().listen((deepLinkData) {
+      // Handle any incoming deep link data here
+      if (deepLinkData.containsKey('+clicked_branch_link') &&
+          deepLinkData['+clicked_branch_link'] == true) {
+        String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
+        print("pageUrl : $pageUrl");
+        handleDeepLink(pageUrl);
+        // Handle navigation or other actions based on the deep link
+      }
+    });
+
+
 
     // Also handle any interaction when the app is in the background via a
     // Stream listener
@@ -268,6 +284,11 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         }
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            sharePage('https://risemb-uat.savemax.com/lead-detail?currentLeadUUID=c52a5e73-5806-4537-81d8-70cb61d1fa4b');
+          },
+        ),
         body: Container(
           //  margin: EdgeInsets.only(top: _statusBarHeight),
           color: Colors.white,
@@ -910,6 +931,46 @@ Future<String> setLatLongToWeb(BuildContext context) async {
   return coordinate;
 }
 
+
+
+void sharePage(String pageUrl) async {
+  String branchLink = await generateBranchLink(pageUrl);
+  Share.share(branchLink);
+}
+
+Future<String> generateBranchLink(String pageUrl) async {
+  BranchUniversalObject buo = await createBranchUniversalObject(pageUrl);
+
+  BranchLinkProperties linkProperties = BranchLinkProperties(
+    channel: 'facebook',
+    feature: 'sharing',
+  );
+
+  BranchResponse response = await FlutterBranchSdk.getShortUrl(
+    buo: buo,
+    linkProperties: linkProperties,
+  );
+
+  if (response.success) {
+    return response.result; // This is the Branch link
+  } else {
+    return pageUrl; // Fallback to the original URL if something goes wrong
+  }
+}
+
+
+Future<BranchUniversalObject> createBranchUniversalObject(String pageUrl) async {
+  BranchUniversalObject buo = BranchUniversalObject(
+    canonicalIdentifier: 'content/12345',
+    canonicalUrl: pageUrl,
+    title: 'Page Title',
+    contentDescription: 'Description of the page',
+    contentMetadata: BranchContentMetaData()
+      ..addCustomMetadata('url', pageUrl),
+  );
+
+  return buo;
+}
 
 
 
