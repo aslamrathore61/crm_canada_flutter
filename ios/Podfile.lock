@@ -1,4 +1,5 @@
 PODS:
+  - BranchSDK (3.6.1)
   - connectivity_plus (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -65,6 +66,9 @@ PODS:
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
   - Flutter (1.0.0)
+  - flutter_branch_sdk (8.2.0):
+    - BranchSDK (~> 3.6.0)
+    - Flutter
   - flutter_downloader (0.0.1):
     - Flutter
   - flutter_inappwebview_ios (0.0.1):
@@ -152,6 +156,7 @@ DEPENDENCIES:
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
+  - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
   - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
@@ -170,6 +175,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - BranchSDK
     - Firebase
     - FirebaseCore
     - FirebaseCoreExtension
@@ -201,6 +207,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
+  flutter_branch_sdk:
+    :path: ".symlinks/plugins/flutter_branch_sdk/ios"
   flutter_downloader:
     :path: ".symlinks/plugins/flutter_downloader/ios"
   flutter_inappwebview_ios:
@@ -233,6 +241,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  BranchSDK: b52d33526115f830ebce6ebdd8ce6e4e27bae977
   connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
   device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   Firebase: 0312a2352584f782ea56f66d91606891d4607f06
@@ -248,6 +257,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfigInterop: b25018791b204c0d78a90e394d6c62d9b1f22da8
   FirebaseSessions: c0939656253a1fa0e94ecc266ccf770cc8b33732
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_branch_sdk: b3763b3d53a7cfbc87c51136bed66fcdc282bdf5
   flutter_downloader: b7301ae057deadd4b1650dc7c05375f10ff12c39
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086

@@ -284,11 +284,11 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         }
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
+      /*  floatingActionButton: FloatingActionButton(
           onPressed: () {
             sharePage('https://risemb-uat.savemax.com/lead-detail?currentLeadUUID=c52a5e73-5806-4537-81d8-70cb61d1fa4b');
           },
-        ),
+        ),*/
         body: Container(
           //  margin: EdgeInsets.only(top: _statusBarHeight),
           color: Colors.white,
@@ -602,9 +602,22 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
     });
 
 
+    controller.addJavaScriptHandler(handlerName: 'openShare', callback: (args) async {
+      String url = args[0];
+      _shareContent(url);
+
+    });
+
+
   }
 
 
+  Future<void> _shareContent(String url) async {
+
+    String branchLink = await generateBranchLink(url);
+
+    Share.share('$branchLink');
+  }
 
   Future<void> _handleJsonMessageUserInfo(Map<String, dynamic> data) async {
     try {
@@ -931,12 +944,6 @@ Future<String> setLatLongToWeb(BuildContext context) async {
   return coordinate;
 }
 
-
-
-void sharePage(String pageUrl) async {
-  String branchLink = await generateBranchLink(pageUrl);
-  Share.share(branchLink);
-}
 
 Future<String> generateBranchLink(String pageUrl) async {
   BranchUniversalObject buo = await createBranchUniversalObject(pageUrl);

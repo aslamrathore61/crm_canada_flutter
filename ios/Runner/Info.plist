@@ -2,66 +2,99 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Rise CRM</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>crm_flutter</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Rise CRM needs access to your camera to allow you to take and upload photos directly within the app. This will help you personalize your profile and listings.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need access to your location to provide location-based services and improve user experience.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need access to your location to provide location-based services and improve user experience.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>We need your location to provide personalized content based on your current location.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need location permission for area project listing</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>We need access to your photo library to add photos.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library to select photos.</string>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+<key>CADisableMinimumFrameDurationOnPhone</key>
+<true/>
+<key>CFBundleDevelopmentRegion</key>
+<string>$(DEVELOPMENT_LANGUAGE)</string>
+<key>CFBundleDisplayName</key>
+<string>Rise CRM</string>
+<key>CFBundleExecutable</key>
+<string>$(EXECUTABLE_NAME)</string>
+<key>CFBundleIdentifier</key>
+<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+<key>CFBundleInfoDictionaryVersion</key>
+<string>6.0</string>
+<key>CFBundleName</key>
+<string>crm_flutter</string>
+<key>CFBundlePackageType</key>
+<string>APPL</string>
+<key>CFBundleShortVersionString</key>
+<string>$(FLUTTER_BUILD_NAME)</string>
+<key>CFBundleSignature</key>
+<string>????</string>
+<key>CFBundleVersion</key>
+<string>$(FLUTTER_BUILD_NUMBER)</string>
+<key>LSRequiresIPhoneOS</key>
+<true/>
+<key>NSCameraUsageDescription</key>
+<string>Rise CRM needs access to your camera to allow you to take and upload photos directly within the app. This will help you personalize your profile and listings.</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>We need access to your location to provide location-based services and improve user experience.</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>We need access to your location to provide location-based services and improve user experience.</string>
+<key>NSLocationUsageDescription</key>
+<string>We need your location to provide personalized content based on your current location.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Need location permission for area project listing</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>We need access to your photo library to add photos.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>We need access to your photo library to select photos.</string>
+<key>UIApplicationSupportsIndirectInputEvents</key>
+<true/>
+<key>UIBackgroundModes</key>
+<array>
+<string>remote-notification</string>
+</array>
+<key>UILaunchStoryboardName</key>
+<string>LaunchScreen</string>
+<key>UIMainStoryboardFile</key>
+<string>Main</string>
+<key>UISupportedInterfaceOrientations</key>
+<array>
+<string>UIInterfaceOrientationPortrait</string>
+<string>UIInterfaceOrientationLandscapeLeft</string>
+<string>UIInterfaceOrientationLandscapeRight</string>
+</array>
+<key>UISupportedInterfaceOrientations~ipad</key>
+<array>
+<string>UIInterfaceOrientationPortrait</string>
+<string>UIInterfaceOrientationPortraitUpsideDown</string>
+<string>UIInterfaceOrientationLandscapeLeft</string>
+<string>UIInterfaceOrientationLandscapeRight</string>
+</array>
+
+    <key>FlutterDeepLinkingEnabled</key>
+<true/>
+
+    <key>CFBundleURLTypes</key>
+<array>
+<dict>
+<key>CFBundleTypeRole</key>
+<string>Editor</string>
+<key>CFBundleURLName</key>
+<string>com.risecrm.canada</string> <!-- Your app's bundle ID -->
+<key>CFBundleURLSchemes</key>
+<array>
+<string>risecrmdeep</string> <!-- Your custom URI scheme -->
+</array>
+</dict>
+</array>
+
+    <key>branch_key</key>
+<dict>
+<key>live</key>
+<string>key_live_mEoN0E4ol4PZ2sVUOkzwbopozFkaEtpS</string> <!-- Your live Branch key -->
+<key>test</key>
+<string>secret_live_G2AAHICkO0Dl2sQtDEIZnlgkikhdfR06</string> <!-- Your test Branch key -->
+</dict>
+
+    <key>branch_universal_link_domains</key>
+<array>
+<string>risecrm.app.link</string> <!-- Your universal link domain -->
+<string>risecrm-alternate.app.link</string> <!-- Alternate universal link domain, if any -->
+<!-- Replace with your actual domains from the Branch dashboard -->
+</array>
+
 </dict>
 </plist>
