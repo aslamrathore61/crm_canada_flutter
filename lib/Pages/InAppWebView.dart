@@ -187,29 +187,31 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
     _internetConnectionStatus();
     setupInteractedMessage();
 
+
+
     // this one will get call when not in killed mode
     FlutterBranchSdk.initSession().listen((deepLinkData) {
+      // print("deepLinkData $deepLinkingURL");
       // Handle any incoming deep link data here
       if (deepLinkData.containsKey('+clicked_branch_link') &&
           deepLinkData['+clicked_branch_link'] == true) {
         String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
         print("pageUrl : $pageUrl");
-          Fluttertoast.showToast(msg: "InAppWebView $pageUrl");
+       // Fluttertoast.showToast(msg: "InAppWebView $pageUrl");
         _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(pageUrl)));
-
         // Handle navigation or other actions based on the deep link
       }
     });
 
 
     // Add a delay before loading the branchUrl in killed mode
+
+    Future.delayed(Duration(seconds: 2), () {
     if (widget.branchUrl.isNotEmpty) {
-      Future.delayed(Duration(seconds: 2), () {
        // Fluttertoast.showToast(msg: "InAppWebView 1 ${widget.branchUrl}");
         _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(widget.branchUrl)));
-      });
     }
-
+    });
 
     _findInteractionController = FindInteractionController();
 

@@ -52,25 +52,21 @@ Future<String> initBranchSession() async {
   Completer<String> completer = Completer<String>();
 
   FlutterBranchSdk.initSession().listen((deepLinkData) {
-    // Handle any incoming deep link data here
-    if (deepLinkData.containsKey('+clicked_branch_link') &&
-        deepLinkData['+clicked_branch_link'] == true) {
-      String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
-      print("pageUrl : $pageUrl");
-      // Complete the completer with the URL
-      completer.complete(pageUrl);
-
-      // Store the URL or pass it to the WebView after initialization
-      // Navigate to the page or perform necessary actions
-    } else {
-      // If no valid deep link data is found, complete with an empty string or null
-      completer.complete('');
+    if (!completer.isCompleted) {
+      if (deepLinkData.containsKey('+clicked_branch_link') &&
+          deepLinkData['+clicked_branch_link'] == true) {
+        String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
+        print("pageUrl : $pageUrl");
+        completer.complete(pageUrl);
+      } else {
+        // If no valid deep link data is found, complete with an empty string or null
+        completer.complete('');
+      }
     }
   });
 
   return completer.future;
 }
-
 
 
 
