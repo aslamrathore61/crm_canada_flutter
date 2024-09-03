@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,6 +25,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Component/buttons/socal_button.dart';
 import '../InAppWebViewUtil.dart';
@@ -45,9 +47,10 @@ final webViewTabStateKey = GlobalKey<_WebViewTabState>();
 class WebViewTab extends StatefulWidget {
 
   final NativeItem nativeItem;
+  final String branchUrl;
   late final UserInfo? userInfo;
 
-  WebViewTab({required this.nativeItem, required this.userInfo});
+  WebViewTab({required this.nativeItem, required this.userInfo, required this.branchUrl});
 
   @override
   State<WebViewTab> createState() => _WebViewTabState();
@@ -68,6 +71,21 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
   final TextEditingController _httpAuthPasswordController =
   TextEditingController();
 
+
+/*
+  void initUniLinks() async {
+    try {
+      // Retrieve the initial deep link that opened the app
+      final initialLink = await getInitialLink();
+
+      Fluttertoast.showToast(msg: initialLink.toString(), toastLength: Toast.LENGTH_SHORT);
+
+    } on Exception catch (e) {
+      // Handle any exceptions (e.g., log the error)
+      print('Error occurred while handling deep link: $e');
+    }
+  }
+*/
 
 
   Future<void> setupInteractedMessage() async {
@@ -116,19 +134,6 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       handleDeepLink(null);
     }*/
 
-    // Now, you can call initSession to handle deep links
-    FlutterBranchSdk.initSession().listen((deepLinkData) {
-      // Handle any incoming deep link data here
-      if (deepLinkData.containsKey('+clicked_branch_link') &&
-          deepLinkData['+clicked_branch_link'] == true) {
-        String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
-        print("pageUrl : $pageUrl");
-        handleDeepLink(pageUrl);
-        // Handle navigation or other actions based on the deep link
-      }
-    });
-
-
 
     // Also handle any interaction when the app is in the background via a
     // Stream listener
@@ -165,7 +170,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
       deepLinkingURL = Config.HOME_URL;
     }
 
-    _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(deepLinkingURL)));
+  //  _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(deepLinkingURL)));
   }
 
 
@@ -181,6 +186,31 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
 
     _internetConnectionStatus();
     setupInteractedMessage();
+
+    // this one will get call when not in killed mode
+    FlutterBranchSdk.initSession().listen((deepLinkData) {
+      // Handle any incoming deep link data here
+      if (deepLinkData.containsKey('+clicked_branch_link') &&
+          deepLinkData['+clicked_branch_link'] == true) {
+        String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
+        print("pageUrl : $pageUrl");
+          Fluttertoast.showToast(msg: "InAppWebView $pageUrl");
+        _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(pageUrl)));
+
+        // Handle navigation or other actions based on the deep link
+      }
+    });
+
+
+    // Add a delay before loading the branchUrl in killed mode
+    if (widget.branchUrl.isNotEmpty) {
+      Future.delayed(Duration(seconds: 2), () {
+       // Fluttertoast.showToast(msg: "InAppWebView 1 ${widget.branchUrl}");
+        _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(widget.branchUrl)));
+      });
+    }
+
+
     _findInteractionController = FindInteractionController();
 
     if (widget.userInfo != null) {

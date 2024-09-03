@@ -47,10 +47,38 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 }
 
+
+Future<String> initBranchSession() async {
+  Completer<String> completer = Completer<String>();
+
+  FlutterBranchSdk.initSession().listen((deepLinkData) {
+    // Handle any incoming deep link data here
+    if (deepLinkData.containsKey('+clicked_branch_link') &&
+        deepLinkData['+clicked_branch_link'] == true) {
+      String pageUrl = deepLinkData['url']; // Retrieve the custom data you sent
+      print("pageUrl : $pageUrl");
+      // Complete the completer with the URL
+      completer.complete(pageUrl);
+
+      // Store the URL or pass it to the WebView after initialization
+      // Navigate to the page or perform necessary actions
+    } else {
+      // If no valid deep link data is found, complete with an empty string or null
+      completer.complete('');
+    }
+  });
+
+  return completer.future;
+}
+
+
+
+
 Future<void> main() async {
 
 
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Branch SDK session early
 
   // Initialize the Branch SDK
   FlutterBranchSdk.init();
@@ -140,6 +168,24 @@ Future<void> main() async {
 
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
+  String branchUrl = await initBranchSession();
+
+/*
+  StreamSubscription<Map> streamSubscription = FlutterBranchSdk.listSession().listen((data) {
+    if (data.containsKey("+clicked_branch_link") &&
+        data["+clicked_branch_link"] == true) {
+      //Link clicked. Add logic to get link data and route user to correct screen
+      print('Custom string: ${data["custom_string"]}');
+
+    }
+  }, onError: (error) {
+    PlatformException platformException = error as PlatformException;
+    print(
+        'InitSession error: ${platformException.code} - ${platformException.message}');
+  });
+*/
+
+
   print('justOne 1');
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -158,7 +204,7 @@ Future<void> main() async {
         final NativeItem nativeItem = args['nativeItem'];
         return BlocProvider(
             create: (context) => GPSBloc()..add(CheckGPS()),
-            child: WebViewTab(nativeItem: nativeItem, userInfo: userInfo));
+            child: WebViewTab(nativeItem: nativeItem, userInfo: userInfo, branchUrl: branchUrl ));
       },
       '/forceUpdatePage': (context) {
         return ForceUpdateScreen();
