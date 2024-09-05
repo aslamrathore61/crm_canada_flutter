@@ -635,6 +635,15 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
 
     });
 
+    controller.addJavaScriptHandler(handlerName: 'openWhatsapp', callback: (args) async {
+      String whsappUrl = args[0];
+      if (await canLaunch(whsappUrl)) {
+        await launch(whsappUrl);
+      } else {
+        throw 'Could not launch $whsappUrl';
+      };
+    });
+
 
   }
 
