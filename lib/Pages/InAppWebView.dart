@@ -25,7 +25,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Component/buttons/socal_button.dart';
 import '../InAppWebViewUtil.dart';
@@ -316,11 +315,7 @@ class _WebViewTabState extends State<WebViewTab> with WidgetsBindingObserver {
         }
       },
       child: Scaffold(
-      /*  floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            sharePage('https://risemb-uat.savemax.com/lead-detail?currentLeadUUID=c52a5e73-5806-4537-81d8-70cb61d1fa4b');
-          },
-        ),*/
+        resizeToAvoidBottomInset: Platform.isAndroid ? true : false,
         body: Container(
           //  margin: EdgeInsets.only(top: _statusBarHeight),
           color: Colors.white,
